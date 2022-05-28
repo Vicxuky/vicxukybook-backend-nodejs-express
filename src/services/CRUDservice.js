@@ -50,7 +50,7 @@ let getAllUser = () => {
 };
 
 let getUserInfoById = (userId) => {
-  return new Promise(async (resolve, eject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       let user = await db.User.findOne({
         where: { id: userId },
@@ -62,13 +62,13 @@ let getUserInfoById = (userId) => {
         resolve({});
       }
     } catch (e) {
-      eject(e);
+      reject(e);
     }
   });
 };
 
 let updateUserData = (data) => {
-  return new Promise(async (resolve, eject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       let user = await db.User.findOne({
         where: { id: data.id },
@@ -86,13 +86,13 @@ let updateUserData = (data) => {
         resolve();
       }
     } catch (e) {
-      eject(e);
+      reject(e);
     }
   });
 };
 
 let deleteUserById = (userId) => {
-  return new Promise(async (resolve, eject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       let user = await db.User.findOne({
         where: { id: userId },
@@ -102,7 +102,7 @@ let deleteUserById = (userId) => {
       }
       resolve();
     } catch (e) {
-      eject(e);
+      reject(e);
     }
   });
 };
