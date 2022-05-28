@@ -14,7 +14,7 @@ let handleLogin = async (req, res) => {
     });
   }
 
-  let userData = await userService.handleLogin(email, password);
+  let userData = await userService.loginSystem(email, password);
   res.cookie("refreshToken", userData.refreshToken, {
     httpOnly: true,
     secure: false,
@@ -31,7 +31,7 @@ let handleLogin = async (req, res) => {
 };
 
 let handleGetAllUsers = async (req, res) => {
-  let id = req.body.id;
+  let id = req.query.id;
 
   if (!id) {
     return res.status(200).json({
@@ -105,9 +105,35 @@ let handleLogout = async (req, res) => {
   return res.status(200).json("Logged Out...");
 };
 
+let handleCreateNewUsers = async (req, res) => {
+  let message = await userService.createNewUser(req.body);
+  console.log(message);
+  return res.status(200).json(message);
+};
+
+let handleEditUsers = async (req, res) => {
+  let data = req.body;
+  let message = await userService.updateUserData(data);
+  return res.status(200).json(message);
+};
+
+let handleDeleteUsers = async (req, res) => {
+  if (!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "Missing required parameters!",
+    });
+  }
+  let message = await userService.deleteUser(req.body.id);
+  return res.status(200).json(message);
+};
+
 module.exports = {
   handleLogin,
   handleGetAllUsers,
+  handleCreateNewUsers,
+  handleEditUsers,
+  handleDeleteUsers,
   handleRefreshToken,
   handleLogout,
 };

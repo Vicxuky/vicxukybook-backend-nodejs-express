@@ -14,10 +14,14 @@ let initWebRoutes = (app) => {
 
   router.post("/put-crud", homeController.putCRUD);
   router.get("/delete-crud", homeController.deleteCRUD);
-
+  // auth
   router.post("/api/v1/login", userController.handleLogin);
   // router.post("/api/v1/signin", userController.handleSignin);
+  // CRUD user
   router.get("/api/v1/get-all-user", userController.handleGetAllUsers);
+  router.post("/api/v1/create-new-user", userController.handleCreateNewUsers);
+  router.put("/api/v1/edit-user", userController.handleEditUsers);
+  router.delete("/api/v1/delete-user", userController.handleDeleteUsers);
 
   // refreshToken
   router.post("/api/v1/refresh", userController.handleRefreshToken);
