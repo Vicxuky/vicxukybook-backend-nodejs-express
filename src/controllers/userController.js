@@ -1,6 +1,6 @@
 import userService from "../services/userService";
 import jwt from "jsonwebtoken";
-
+//
 let refreshTokens = [];
 
 let handleLogin = async (req, res) => {
@@ -17,6 +17,7 @@ let handleLogin = async (req, res) => {
   let userData = await userService.loginSystem(email, password);
   res.cookie("refreshToken", userData.refreshToken, {
     httpOnly: true,
+    // secure: true, chỉ dùng khi web load https
     secure: false,
     path: "/",
     sameSite: "strict",
@@ -24,8 +25,8 @@ let handleLogin = async (req, res) => {
   return res.status(200).json({
     errCode: userData.errCode,
     message: userData.errMessage,
-    token: userData.accessToken,
-    // token2: userData.refreshToken,
+    accessToken: userData.accessToken,
+    // refreshToken: userData.refreshToken,
     user: userData.user ? userData.user : {},
   });
 };
@@ -36,7 +37,7 @@ let handleGetAllUsers = async (req, res) => {
   if (!id) {
     return res.status(200).json({
       errCode: 1,
-      errMessage: "Missing...",
+      errMessage: "Missing...parameters",
       users: [],
     });
   }

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const middlewareController = () => {
-  verifyToken: (req, res) => {
+  verifyToken: (req, res, next) => {
     const token = req.headers.token;
     if (token) {
       const accessToken = token.split(" ")[1];

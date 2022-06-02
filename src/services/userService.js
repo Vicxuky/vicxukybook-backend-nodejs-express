@@ -114,24 +114,25 @@ let createNewUser = async (data) => {
       if (check === true) {
         resolve({
           errCode: 1,
-          message: "Email already exists!!!",
+          errMessage: "Email already exists!!!",
+        });
+      } else {
+        let hashPasswordFromBcryptjs = await hashUserPassword(data.password);
+        await db.User.create({
+          email: data.email,
+          password: hashPasswordFromBcryptjs,
+          fullName: data.fullName,
+          image: data.image,
+          phoneNumber: data.phoneNumber,
+          address: data.address,
+          gender: data.gender === "1" ? true : false,
+          roleId: data.roleId,
+        });
+        resolve({
+          errCode: 0,
+          errMessage: "Create new user succeed!!",
         });
       }
-      let hashPasswordFromBcryptjs = await hashUserPassword(data.password);
-      await db.User.create({
-        email: data.email,
-        password: hashPasswordFromBcryptjs,
-        fullName: data.fullName,
-        image: data.image,
-        phoneNumber: data.phoneNumber,
-        address: data.address,
-        gender: data.gender === "1" ? true : false,
-        roleId: data.roleId,
-      });
-      resolve({
-        errCode: 0,
-        message: "Create new user succeed!!",
-      });
     } catch (e) {
       reject(e);
     }
@@ -166,17 +167,11 @@ let updateUserData = (data) => {
         // raw sequelize
         user.fullName = data.fullName;
         user.phoneNumber = data.phoneNumber;
-        user.gender = data.gender === "1" ? true : false;
         user.address = data.address;
+        user.gender = data.gender === "1" ? true : false;
+        user.roleId = data.roleId;
 
         await user.save();
-        // raw, database
-        // await db.User.save({
-        //   fullName: data.fullName,
-        //   phoneNumber: data.phoneNumber,
-        //   gender: data.gender === "1" ? true : false,
-        //   address: data.address,
-        // });
         resolve({
           errCode: 0,
           errMessage: "Update the succeed!",
