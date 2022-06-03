@@ -21,12 +21,21 @@ let initWebRoutes = (app) => {
 
   // CRUD user
   router.get("/api/v1/get-all-user", userController.handleGetAllUsers);
-  router.post("/api/v1/create-new-user", userController.handleCreateNewUsers);
-  router.put("/api/v1/edit-user", userController.handleEditUsers);
-  router.delete("/api/v1/delete-user", userController.handleDeleteUsers);
+  router.post("/api/v1/create-new-user", userController.handleCreateNewUser);
+  router.put("/api/v1/edit-user", userController.handleEditUser);
+  router.delete("/api/v1/delete-user", userController.handleDeleteUser);
 
   // CRUD product
   router.get("/api/v1/get-all-product", productController.handleGetAllProduct);
+  router.post(
+    "/api/v1/create-new-product",
+    productController.handleCreateNewProduct
+  );
+  router.delete(
+    "/api/v1/delete-product",
+    productController.handleDeleteProduct
+  );
+  router.put("/api/v1/edit-product", productController.handleEditProduct);
 
   // refreshToken
   router.post("/api/v1/refresh", userController.handleRefreshToken);

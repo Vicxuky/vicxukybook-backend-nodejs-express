@@ -106,19 +106,19 @@ let handleLogout = async (req, res) => {
   return res.status(200).json("Logged Out...");
 };
 
-let handleCreateNewUsers = async (req, res) => {
+let handleCreateNewUser = async (req, res) => {
   let message = await userService.createNewUser(req.body);
   console.log(message);
   return res.status(200).json(message);
 };
 
-let handleEditUsers = async (req, res) => {
+let handleEditUser = async (req, res) => {
   let data = req.body;
   let message = await userService.updateUserData(data);
   return res.status(200).json(message);
 };
 
-let handleDeleteUsers = async (req, res) => {
+let handleDeleteUser = async (req, res) => {
   if (!req.body.id) {
     return res.status(200).json({
       errCode: 1,
@@ -132,9 +132,9 @@ let handleDeleteUsers = async (req, res) => {
 module.exports = {
   handleLogin,
   handleGetAllUsers,
-  handleCreateNewUsers,
-  handleEditUsers,
-  handleDeleteUsers,
+  handleCreateNewUser,
+  handleEditUser,
+  handleDeleteUser,
   handleRefreshToken,
   handleLogout,
 };
