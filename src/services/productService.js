@@ -20,7 +20,6 @@ let getAllProduct = (productId) => {
 };
 
 let createNewProduct = async (data) => {
-  console.log(data);
   return new Promise(async (resolve, reject) => {
     try {
       await db.Product.create({

@@ -2,6 +2,7 @@ import express from "express";
 import homeController from "../controllers/homeCotroller";
 import userController from "../controllers/userController";
 import productController from "../controllers/productController";
+import orderController from "../controllers/orderController";
 let router = express.Router();
 
 let initWebRoutes = (app) => {
@@ -36,6 +37,10 @@ let initWebRoutes = (app) => {
     productController.handleDeleteProduct
   );
   router.put("/api/v1/edit-product", productController.handleEditProduct);
+  // order
+  router.get("/api/v1/get-order", orderController.handleGetALLOrder);
+  router.post("/api/v1/post-order", orderController.handlePostOrder);
+  router.delete("/api/v1/delete-order", orderController.handleDeleteOrder);
 
   // refreshToken
   router.post("/api/v1/refresh", userController.handleRefreshToken);
