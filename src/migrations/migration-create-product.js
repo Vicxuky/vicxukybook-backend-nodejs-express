@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       desc: {
-        type: Sequelize.BLOB,
+        type: Sequelize.TEXT,
       },
       quantity: {
         type: Sequelize.INTEGER,

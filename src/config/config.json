@@ -1,15 +1,21 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "vicxukybook",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "username": "apebnbdxecpyrj",
+    "password": "8ff67a37e53017c630520eb1c945a9c3f3b8dbb4129d217f6f493cdd2d52de15",
+    "database": "d505236bspups6",
+    "host": "ec2-34-225-159-178.compute-1.amazonaws.com",
+    "dialect": "postgres",
     "logging": false,
     "query": {
       "raw": true
     },
-    "timezone": "+07:00"
+    "timezone": "+07:00",
+    "dialectOptions": {
+      "ssl": {
+        "sequire": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "username": "root",
